@@ -33,8 +33,11 @@ jobs:
           git add artifacts/
           git commit -m "Add built artifact"
           git push origin HEAD:refs/heads/main
+      - name: List contents of artifacts directory
+        run: ls artifacts/
+
 
       - name: Execute Java Program
-        run: java -cp artifacts/*.jar Configure
+        run: java -cp artifacts/*.jar com.google.firebase.samples.config.Configure
 
       # Add additional steps here if needed
