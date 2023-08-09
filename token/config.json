@@ -1,0 +1,63 @@
+{
+  "conditions": [
+    {
+      "expression": "device.os == 'android' && device.country in ['us', 'uk']",
+      "name": "FSW Android",
+      "tagColor": "GREEN"
+    }
+  ],
+  "etag": "etag-82509805606-20",
+  "parameterGroups": {
+    "NPS": {
+      "parameters": {
+        "survey_config": {
+          "conditionalValues": {},
+          "defaultValue": {
+            "value": "{\"jfdatujf-fst\":3,\"hkaf_hfgsdf\":4}"
+          }
+        }
+      }
+    },
+    "HFSDJF": {
+      "parameters": {
+        "hfsdjf_config": {
+          "conditionalValues": {},
+          "defaultValue": {
+            "value": "HDFSUGFSDF"
+          }
+        }
+      }
+    },
+    "Medication": {
+      "parameters": {
+        "medication_config": {
+          "conditionalValues": {},
+          "defaultValue": {
+            "value": "Technology"
+          }
+        }
+      }
+    },
+    "Hospitalization": {
+      "parameters": {
+        "manage_go": {
+          "conditionalValues": {},
+          "defaultValue": {
+            "value": "Health"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "version": {
+    "legacy": false,
+    "updateOrigin": "REST_API",
+    "updateTime": "Mon, 07 Aug 2023 09:07:42 UTC",
+    "updateType": "INCREMENTAL_UPDATE",
+    "updateUser": {
+      "email": "firebase-adminsdk-enskq@fir-prject-1abf3.iam.gserviceaccount.com"
+    },
+    "versionNumber": "20"
+  }
+}

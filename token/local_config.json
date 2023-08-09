@@ -1,0 +1,60 @@
+{
+  "conditions": [
+    {
+      "name": "FSW Android",
+      "expression": "device.os == 'android' && device.country in ['us', 'uk']",
+      "tagColor": "GREEN"
+    }
+  ],
+  "version": {
+    "versionNumber": "6",
+    "updateTime": "2023-07-25T07:24:24.674391Z",
+    "updateUser": {
+      "email": "shivanivaikar@titan.co.in"
+    },
+    "updateOrigin": "CONSOLE",
+    "updateType": "INCREMENTAL_UPDATE"
+  },
+  "parameterGroups": {
+    "Medication": {
+      "parameters": {
+        "medication_config": {
+          "defaultValue": {
+            "value": "Technology"
+          },
+          "valueType": "JSON"
+        }
+      }
+    },
+    "Hospitalization": {
+      "parameters": {
+        "manage_go": {
+          "defaultValue": {
+            "value": "Health"
+          },
+          "valueType": "JSON"
+        }
+      }
+    },
+    "NPS": {
+      "parameters": {
+        "survey_config": {
+          "defaultValue": {
+            "value": "{\"jfdatujf-fst\":3,\"hkaf_hfgsdf\":4}"
+          },
+          "valueType": "JSON"
+        }
+      }
+    },
+    "HFSDJF": {
+      "parameters": {
+        "hfsdjf_config": {
+          "defaultValue": {
+            "value": "HDFSUGFSDF"
+          },
+          "valueType": "JSON"
+        }
+      }
+    }
+  }
+}
