@@ -19,7 +19,9 @@ jobs:
           java-version: '17'
 
       - name: Build with Maven
-        run: mvn -B package --file token/pom.xml
+        run: mvn -B package
 
       - name: Execute Java Program
         run: java -cp target/token.jar Configure.java
+
+      # Add additional steps here if needed
