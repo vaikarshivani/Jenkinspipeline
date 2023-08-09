@@ -23,6 +23,6 @@ jobs:
         run: mvn -B package --file token/pom.xml
 
       - name: Execute Java Program
-        run: java -cp target/token.jar Configure.java
+        run: java -cp target/token.jar com.google.firebase.samples.config.Configure
 
       # Add additional steps here if needed
