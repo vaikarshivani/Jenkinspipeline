@@ -35,6 +35,6 @@ jobs:
           git push origin HEAD:refs/heads/main
 
       - name: Execute Java Program
-        run: java -cp artifacts/*.jar com.google.firebase.samples.config.Configure
+        run: java -cp artifacts/*.jar Configure
 
       # Add additional steps here if needed
