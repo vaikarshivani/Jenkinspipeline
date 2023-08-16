@@ -29,9 +29,13 @@ pipeline {
         stage('Store artifact') {
             steps {
                 script {
-                   def artifactDir = "D:\\artifacts" // Change this path to the desired location on the D drive
-                   bat "mkdir ${artifactDir}"
-                   bat "copy token\\target\\*.jar ${artifactDir}\\"
+                  def artifactDir = "D:\\artifacts" // Change this path to the desired location on the D drive
+            
+                  if (!fileExists(artifactDir)) {
+                        bat "mkdir ${artifactDir}"
+                  }
+            
+                  bat "copy token\\target\\*.jar ${artifactDir}\\"
                 }
             }
         }
