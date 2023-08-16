@@ -12,20 +12,28 @@ pipeline {
                 checkout scm
             }
         }
-
-        stage('Build and Run') {
+		stage('Build with Maven') {
             steps {
-                script {
-                    def javaCmd = "\"${env.JDK_HOME}\\bin\\java\""
-                    def javacCmd = "\"${env.JDK_HOME}\\bin\\javac\""
-                    bat "dir"
-                    // Compile the Java class
-                    bat "${javacCmd} -classpath . Configure.java"
 
-                    // Run the Java class
-                    bat "start ${javaCmd} -classpath . Configure.java"
-                }
+                bat 'mvn -B package --file token/pom.xml'
+
             }
+
         }
+
+        // stage('Build and Run') {
+        //     steps {
+        //         script {
+        //             def javaCmd = "\"${env.JDK_HOME}\\bin\\java\""
+        //             def javacCmd = "\"${env.JDK_HOME}\\bin\\javac\""
+                  
+        //             // Compile the Java class
+        //             bat "${javacCmd} -classpath . Configure.java"
+
+        //             // Run the Java class
+        //             bat "start ${javaCmd} -classpath . Configure.java"
+        //         }
+        //     }
+        // }
     }
 }
