@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         mavenTool = 'Maven 3.9.4'
+        gitRemoteUrl = 'https://github.com/shivanititan/Firebase.git'
     }
 
     stages {
@@ -39,7 +40,7 @@ pipeline {
                 script {
                  
                     
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GITHUB_TOKEN', url: 'https://github.com/shivanititan/Firebase.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GITHUB_TOKEN', url:gitRemoteUrl]]])
                     
                     try {
                         bat 'git add artifacts/'
@@ -47,6 +48,7 @@ pipeline {
                         bat 'git push origin HEAD:refs/heads/main'
                     } catch (Exception e) {
                         echo "Error pushing artifact to GitHub: ${e.getMessage()}"
+                        echo "git error: ${error}"
                     }
                 }
             }
