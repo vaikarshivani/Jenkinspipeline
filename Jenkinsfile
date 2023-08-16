@@ -34,7 +34,7 @@ pipeline {
 
         stage('Commit and push artifact') {
             steps {
-                withCredentials([gitUsernamePassword(credentialsId: 'f9cb8e69-ab76-4897-a27f-bfa66dcbd1b8', gitToolName: 'Default')]) {
+                withCredentials([gitUsernamePassword(credentialsId: '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', variable: 'GIT_TOKEN')]) {
                     script {
                         try {
                             bat 'git add artifacts/'
