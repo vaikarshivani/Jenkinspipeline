@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script{
                 def javaCmd = "${tool(name: 'JDK11', type: 'jdk')}/bin/java"
-                bat "\"${javaCmd}\" Firebase-0.0.1-SNAPSHOT.jar java.com.google.firebase.samples.config.TemplateConfigure"
+                bat "\"${javaCmd}\" token/target/Firebase-0.0.1-SNAPSHOT.jar java.com.google.firebase.samples.config.TemplateConfigure"
                 }
             }
         }
