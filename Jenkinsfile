@@ -20,10 +20,10 @@ pipeline {
                     def javacCmd = "\"${env.JDK_HOME}\\bin\\javac\""
 
                     // Compile the Java class
-                    bat "${javacCmd} -classpath . TemplateConfigure.java"
+                    bat "${javacCmd} -classpath . Configure.java"
 
                     // Run the Java class
-                    bat "start ${javaCmd} -classpath . TemplateConfigure"
+                    bat "start ${javaCmd} -classpath . Configure"
                 }
             }
         }
