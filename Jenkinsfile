@@ -4,7 +4,7 @@ pipeline {
     environment {
         mavenTool = 'Maven 3.9.4'
     }
-    
+
     stages {
         stage('Checkout code') {
             steps {
@@ -25,34 +25,32 @@ pipeline {
             }
         }
 
-        
         stage('Store artifact') {
             steps {
-                // bat 'mkdir artifacts'
+                bat 'mkdir artifacts'
                 bat 'copy token\\target\\*.jar artifacts\\'
             }
         }
-        
-         stage('Commit and push artifact') {
+
+        stage('Commit and push artifact') {
             steps {
-				withCredentials([gitUsernamePassword(credentialsId: 'f9cb8e69-ab76-4897-a27f-bfa66dcbd1b8', gitToolName: 'Default')])
-		    try{
-        
-			  bat 'git add artifacts/'
-			  bat 'git commit -m "Add built artifact"'
-			  bat 'git push origin HEAD:refs/heads/main'
-		
-			}catch (Exception e) {
-              			  error "Error pushing artifact to GitHub: ${e.getMessage()}"
-          	  }
-	    }
-      	  }
+                withCredentials([gitUsernamePassword(credentialsId: 'f9cb8e69-ab76-4897-a27f-bfa66dcbd1b8', gitToolName: 'Default')]) {
+                    try {
+                        bat 'git add artifacts/'
+                        bat 'git commit -m "Add built artifact"'
+                        bat 'git push origin HEAD:refs/heads/main'
+                    } catch (Exception e) {
+                        error "Error pushing artifact to GitHub: ${e.getMessage()}"
+                    }
+                }
+            }
+        }
 
         stage('Compile and Run Java Program') {
             steps {
-                script{
-                def javaCmd = "${tool(name: 'JDK11', type: 'jdk')}/bin/java"
-                bat "\"${javaCmd}\" token/target/Firebase-0.0.1-SNAPSHOT.jar java.com.google.firebase.samples.config.TemplateConfigure"
+                script {
+                    def javaCmd = "${tool(name: 'JDK11', type: 'jdk')}/bin/java"
+                    bat "\"${javaCmd}\" -cp token/target/Firebase-0.0.1-SNAPSHOT.jar com.google.firebase.samples.config.TemplateConfigure"
                 }
             }
         }
