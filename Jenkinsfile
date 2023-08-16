@@ -16,8 +16,8 @@ pipeline {
         stage('Build and Run') {
             steps {
                 script {
-                    def javaCmd = "\"${env.JDK_HOME}\bin\java\""
-                    def javacCmd = "\"${env.JDK_HOME}\bin\javac\""
+                    def javaCmd = "\"${env.JDK_HOME}\\bin\\java\""
+                    def javacCmd = "\"${env.JDK_HOME}\\bin\\javac\""
 
                     // Compile the Java class
                     bat "${javacCmd} -classpath . TemplateConfigure.java"
