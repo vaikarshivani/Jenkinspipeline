@@ -37,9 +37,7 @@ pipeline {
         stage('Commit and push artifact') {
             steps {
                 script {
-                    def gitActor = env.GITHUB_ACTOR
-                    gitUserName(gitActor)
-                    gitUserEmail("${gitActor}@users.noreply.github.com")
+                 
                     
                     checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GITHUB_TOKEN', url: 'https://github.com/shivanititan/Firebase.git']]])
                     
