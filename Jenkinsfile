@@ -29,7 +29,7 @@ pipeline {
         stage('Store artifact') {
             steps {
                 bat 'mkdir -p artifacts'
-                bat 'cp token/target/*.jar artifacts/'
+                bat 'copy token/target/*.jar artifacts/'
             }
         }
         
