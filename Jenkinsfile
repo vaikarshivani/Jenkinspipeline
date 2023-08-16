@@ -38,18 +38,27 @@ pipeline {
         stage('Commit and push artifact') {
             steps {
                 script {
-                 
-                    
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GITHUB_TOKEN', url:gitRemoteUrl]]])
-                    
-                    try {
+                        def gitActor = env.GITHUB_ACTOR
+                        def gitEmail = "${gitActor}@users.noreply.github.com"
+            
+                        bat "git config --global user.name ${gitActor}"
+                        bat "git config --global user.email ${gitEmail}"
+            
                         bat 'git add artifacts/'
                         bat 'git commit -m "Add built artifact"'
                         bat 'git push origin HEAD:refs/heads/main'
-                    } catch (Exception e) {
-                        echo "Error pushing artifact to GitHub: ${e.getMessage()}"
-                        echo "git error: ${error}"
-                    }
+                    
+                //     checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GITHUB_TOKEN', url:gitRemoteUrl]]])
+                    
+                //     try {
+                //         bat 'git add artifacts/'
+                //         bat 'git commit -m "Add built artifact"'
+                //         bat 'git push origin HEAD:refs/heads/main'
+                //     } catch (Exception e) {
+                //         echo "Error pushing artifact to GitHub: ${e.getMessage()}"
+                //         echo "git error: ${error}"
+                //     }
+                // }
                 }
             }
         }
