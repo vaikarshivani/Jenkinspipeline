@@ -8,14 +8,14 @@
 		<version>2.2.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.firebase.template</groupId>
-	<artifactId>Firebase</artifactId>
+	<groupId>com.google.firebase.samples.config</groupId>
+	<artifactId>firebase</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Firebase</name>
+	<name>firebase</name>
 	<description>Demo project for firebase config</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
