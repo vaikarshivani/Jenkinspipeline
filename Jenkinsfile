@@ -84,7 +84,7 @@ pipeline {
                     gitUserName(gitActor)
                     gitUserEmail("${gitActor}@users.noreply.github.com")
                     
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'YOUR_CREDENTIALS_ID', url: 'https://github.com/shivanititan/Firebase.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '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', url: 'https://github.com/shivanititan/Firebase.git']]])
                     
                     try {
                         bat 'git add artifacts/'
@@ -107,7 +107,7 @@ pipeline {
         }
     }
 }
-', url: 'YOUR_GITHUB_REPO_URL']]])
+', url: 'https://github.com/shivanititan/Firebase.git']]])
                     
                     try {
                         bat 'git add artifacts/'
