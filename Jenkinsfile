@@ -39,7 +39,7 @@ pipeline {
                     def gitActor = env.GITHUB_ACTOR
                     gitUserName(gitActor)
 
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'shivanititan', url: 'https://github.com/shivanititan/Firebase']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'f9cb8e69-ab76-4897-a27f-bfa66dcbd1b8', url: 'https://github.com/shivanititan/Firebase.git']]])
                     bat 'git add artifacts/'
                     bat 'git commit -m "Add built artifact"'
                     bat 'git push origin HEAD:refs/heads/main'
