@@ -48,7 +48,7 @@ pipeline {
                         bat 'git commit -m "Add built artifact"'
                         bat 'git push origin HEAD:refs/heads/main'
                     } catch (Exception e) {
-                        error "Error pushing artifact to GitHub: ${e.getMessage()}"
+                        echo "Error pushing artifact to GitHub: ${e.getMessage()}"
                     }
                 }
             }
