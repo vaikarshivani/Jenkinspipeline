@@ -1,4 +1,4 @@
-name: Update and Publish Firebase Remote Config
+name: Build and Deploy
 
 on:
   push:
@@ -6,38 +6,35 @@ on:
       - main
 
 jobs:
-  update_and_publish:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: 11
+      
+    - name: Build with Maven
+      run: |
+        mvn -B clean compile package --file token/pom.xml
 
-      - name: Set up JDK
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+    - name: Store artifact
+      run: |
+        mkdir artifacts
+        cp token/target/*.jar artifacts/
 
-      - name: Build with Maven
-        run: mvn -B package --file token/pom.xml
+    - name: Commit and push artifact
+      run: |
+        git config --global user.name ${{ github.actor }}
+        git config --global user.email ${{ github.actor }}@users.noreply.github.com
+        git add artifacts/
+        git commit -m "Add built artifact"
+        git push origin HEAD:refs/heads/main
 
-      - name: Store artifact
-        run: |
-          mkdir -p artifacts
-          cp token/target/*.jar artifacts/
-      - name: Commit and push artifact
-        run: |
-          git config --global user.name "${GITHUB_ACTOR}"
-          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git add artifacts/
-          git commit -m "Add built artifact"
-          git push origin HEAD:refs/heads/main
-      - name: List contents of artifacts directory
-        run: ls artifacts/
-
-
-      - name: Execute Java Program
-        run: java -cp artifacts/*.jar com.google.firebase.samples.config.Configure
-
-      # Add additional steps here if needed
+    - name: Compile and Run Java Program
+      run: |
+        java -cp token/target/Firebase-0.0.1-SNAPSHOT.jar com.google.firebase.samples.config.TemplateConfigure
