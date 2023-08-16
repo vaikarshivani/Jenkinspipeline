@@ -35,12 +35,14 @@ pipeline {
         stage('Commit and push artifact') {
             steps {
                 withCredentials([gitUsernamePassword(credentialsId: 'f9cb8e69-ab76-4897-a27f-bfa66dcbd1b8', gitToolName: 'Default')]) {
-                    try {
-                        bat 'git add artifacts/'
-                        bat 'git commit -m "Add built artifact"'
-                        bat 'git push origin HEAD:refs/heads/main'
-                    } catch (Exception e) {
-                        error "Error pushing artifact to GitHub: ${e.getMessage()}"
+                    script {
+                        try {
+                            bat 'git add artifacts/'
+                            bat 'git commit -m "Add built artifact"'
+                            bat 'git push origin HEAD:refs/heads/main'
+                        } catch (Exception e) {
+                            error "Error pushing artifact to GitHub: ${e.getMessage()}"
+                        }
                     }
                 }
             }
