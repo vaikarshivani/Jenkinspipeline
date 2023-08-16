@@ -27,7 +27,7 @@ pipeline {
 
         stage('Execute Java Program') {
             steps {
-                bat 'java -cp token/target/Firebase-0.0.1-SNAPSHOT.jar com.google.firebase.samples.config.TemplateConfigure'
+                bat 'java -cp token/target/Firebase-0.0.1-SNAPSHOT.jar com.firebase.template.TemplateConfigure'
             }
         }
     }
