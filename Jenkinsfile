@@ -33,18 +33,17 @@ pipeline {
             }
         }
         
-        stage('Commit and push artifact') {
+         stage('Commit and push artifact') {
             steps {
+				withCredentials([gitUsernamePassword(credentialsId: 'f9cb8e69-ab76-4897-a27f-bfa66dcbd1b8', gitToolName: 'Default')])
                 script {
-                    def gitActor = env.GITHUB_ACTOR
-                    gitUserName(gitActor)
-
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'f9cb8e69-ab76-4897-a27f-bfa66dcbd1b8', url: 'https://github.com/shivanititan/Firebase.git']]])
-                    bat 'git add artifacts/'
-                    bat 'git commit -m "Add built artifact"'
-                    bat 'git push origin HEAD:refs/heads/main'
-                }
-            }
+                        
+					bat 'git add artifacts/'
+					bat 'git commit -m "Add built artifact"'
+					bat 'git push origin HEAD:refs/heads/main'
+           
+				}
+			}
         }
 
         stage('Compile and Run Java Program') {
