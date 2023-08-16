@@ -25,9 +25,25 @@ pipeline {
             }
         }
 
-        stage('Archive Artifacts') {
+        
+        stage('Store artifact') {
             steps {
-                archiveArtifacts artifacts: 'token/target/Firebase-0.0.1-SNAPSHOT.jar', allowEmptyArchive: true
+                sh 'mkdir -p artifacts'
+                sh 'cp token/target/*.jar artifacts/'
+            }
+        }
+        
+        stage('Commit and push artifact') {
+            steps {
+                script {
+                    def gitActor = env.GITHUB_ACTOR
+                    gitUserName(gitActor)
+
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'shivanititan', url: 'https://github.com/shivanititan/Firebase']]])
+                    bat 'git add artifacts/'
+                    bat 'git commit -m "Add built artifact"'
+                    bat 'git push origin HEAD:refs/heads/main'
+                }
             }
         }
 
