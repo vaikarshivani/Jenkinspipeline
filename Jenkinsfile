@@ -33,8 +33,10 @@ pipeline {
 
         stage('Compile and Run Java Program') {
             steps {
+                script{
                 def javaCmd = "${tool(name: 'JDK11', type: 'jdk')}/bin/java"
                 bat "\"${javaCmd}\" -cp token/target/Firebase-0.0.1-SNAPSHOT.jar com.firebase.template.TemplateConfigure"
+                }
             }
         }
     }
