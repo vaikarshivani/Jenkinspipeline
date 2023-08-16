@@ -27,7 +27,7 @@ pipeline {
 
         stage('Execute Java Program') {
             steps {
-                bat 'java -cp token/target/restdemo-0.0.1-SNAPSHOT.jar com.google.firebase.samples.config.Configure'
+                bat 'java -cp token/target/restdemo-0.0.1-SNAPSHOT.jar com.google.firebase.samples.config.TemplateConfigure'
             }
         }
     }
