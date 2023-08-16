@@ -39,15 +39,15 @@ pipeline {
         stage('Commit and push artifact') {
             steps {
                 script {
-                        def gitActor = env.GITHUB_ACTOR
-                        def gitEmail = "${gitActor}@users.noreply.github.com"
+                        // def gitActor = env.GITHUB_ACTOR
+                        // def gitEmail = "${gitActor}@users.noreply.github.com"
             
-                        bat "git config --global user.name ${gitActor}"
-                        bat "git config --global user.email ${gitEmail}"
+                        // bat "git config --global user.name ${gitActor}"
+                        // bat "git config --global user.email ${gitEmail}"
             
-                        bat 'git add artifacts/'
-                        bat 'git commit -m "Add built artifact"'
-                        bat 'git push origin HEAD:refs/heads/main'
+                        // bat 'git add artifacts/'
+                        // bat 'git commit -m "Add built artifact"'
+                        // bat 'git push origin HEAD:refs/heads/main'
                     
                 //     checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GITHUB_TOKEN', url:gitRemoteUrl]]])
                     
