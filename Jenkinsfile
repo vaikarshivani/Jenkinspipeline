@@ -27,7 +27,8 @@ pipeline {
 
         stage('Store artifact') {
             steps {
-                bat 'mkdir artifacts'
+                script{
+                // bat 'mkdir artifacts'
                 bat 'copy token\\target\\*.jar artifacts\\'
             }
         }
