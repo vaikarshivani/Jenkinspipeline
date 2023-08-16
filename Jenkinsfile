@@ -1,51 +1,21 @@
 pipeline {
     agent any
 
-    environment {
-        mavenTool = 'Maven 3.9.4'
-        gitRemoteUrl = 'https://github.com/shivanititan/Firebase.git'
-    }
-
     stages {
-        stage('Checkout code') {
+        stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Set up JDK') {
-            steps {
-                tool name: 'JAVA', type: 'jdk'
-            }
-        }
-
-        stage('Build with Maven') {
-            steps {
-                tool name: mavenTool, type: 'hudson.tasks.Maven$MavenInstallation'
-                bat "\"${tool(name: mavenTool, type: 'hudson.tasks.Maven$MavenInstallation')}/bin/mvn\" -B clean compile package --file token/pom.xml"
-            }
-        }
-
-        stage('Store artifact') {
+        stage('Build and Run Docker') {
             steps {
                 script {
-                  def artifactDir = "D:\\artifacts" // Change this path to the desired location on the D drive
-            
-                  if (!fileExists(artifactDir)) {
-                        bat "mkdir ${artifactDir}"
-                  }
-            
-                  bat "copy token\\target\\*.jar ${artifactDir}\\"
-                }
-            }
-        }
+                    def dockerImage = docker.build("my-java-app:${env.BUILD_ID}", "-f Dockerfile .")
 
-
-        stage('Compile and Run Java Program') {
-            steps {
-                script {
-                    def javaCmd = "${tool(name: 'JAVA', type: 'jdk')}/bin/java"
-                    bat "\"${javaCmd}\" -cp token/target/Firebase-0.0.1-SNAPSHOT.jar com.google.firebase.samples.config.TemplateConfigure"
+                    dockerImage.inside("--rm -v $PWD:/app -w /app") {
+                        sh "mvn clean package"
+                    }
                 }
             }
         }
