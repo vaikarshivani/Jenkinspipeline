@@ -49,6 +49,6 @@ pipeline {
         //     steps {
         //         sh 'java -cp artifacts/restdemo-0.0.1-SNAPSHOT.jar com.google.firebase.samples.config.Configure'
         //     }
-        }
+        
     }
 }
