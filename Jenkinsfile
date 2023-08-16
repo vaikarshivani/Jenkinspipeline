@@ -39,5 +39,5 @@ pipeline {
                 }
             }
         }
-    }src/main/java/com/google/firebase
+    }
 }
