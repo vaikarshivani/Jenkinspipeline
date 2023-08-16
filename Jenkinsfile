@@ -25,11 +25,11 @@ pipeline {
             }
         }
 
-        // stage('Archive Artifacts') {
-        //     steps {
-        //         archiveArtifacts artifacts: 'token/target/Firebase-0.0.1-SNAPSHOT.jar', allowEmptyArchive: true
-        //     }
-        // }
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'token/target/Firebase-0.0.1-SNAPSHOT.jar', allowEmptyArchive: true
+            }
+        }
 
         stage('Compile and Run Java Program') {
             steps {
